@@ -2,18 +2,22 @@
 
 **Yapool** is a commond-line tool for executing shell commands via SSH for application deployment or systems administration tasks. It is inspired by Ruby's [Capistrano](http://capistranorb.com) and Python's [Fabric](http://fabfile.org).
 
+## Warning
+
+This software is still pre-ALPHA quality. There's no implementation. Enjoy the rest of this document.
+
 ## Usage
 
 ```
 $ yap deploy
-$ YAP_ENV=production yap deploy
+$ yap -e production deploy
 ```
 
 ## Installation
 
-As Yapool depends on [Roswell](https://github.com/snmsts/roswell), you have to install it before. Roswell is a Common Lisp implementation manager and also provides command-line interface for Common Lisp.
+For the first place, you need to install [Roswell](https://github.com/snmsts/roswell) Yapool depends on. Roswell is a Common Lisp implementation manager and also provides command-line interface for Common Lisp.
 
-Yapool is not ready for installing via Quicklisp yet. Download it from [GitHub](https://github.com/fukamachi/yapool) and put it into a directory ASDF can find (like `~/common-lisp`).
+As Yapool is not ready for installing via Quicklisp yet, download it from [GitHub](https://github.com/fukamachi/yapool) and put it into a directory ASDF can find (like `~/common-lisp`).
 
 ```
 $ cd ~/common-lisp
@@ -35,8 +39,6 @@ A project that intends to use Yapool must have `yapfile.lisp` and `yap/` directo
 
 `yapfile.lisp` is a configuration file for defining environmental variables like server names. Yapool adopts [Envy](https://github.com/fukamachi/envy) to define them.
 
-The file will be loaded in `:yapool-user` (= `:yap-user`) package which imports symbols in `:cl` and `:envy` package.
-
 ```common-lisp
 (in-package :yap-user)
 
@@ -50,6 +52,8 @@ The file will be loaded in `:yapool-user` (= `:yap-user`) package which imports 
 (defconfig |staging|
   '(:hosts ("10.0.12.04")))
 ```
+
+The file will be loaded in `:yapool-user` (= `:yap-user`) package which imports symbols in `:cl` and `:envy` package.
 
 See [documentation of Envy](https://github.com/fukamachi/envy) for getting how to use it.
 
